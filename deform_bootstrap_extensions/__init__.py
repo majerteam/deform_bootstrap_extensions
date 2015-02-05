@@ -72,7 +72,7 @@ class DisabledInput(deform.widget.Widget):
             cstruct = u''
         quoted = cgi.escape(cstruct, quote='"')
         params = {'name': field.name, 'value': quoted}
-        return render(self.template, params)
+        return field.renderer(self.template, **params)
 
     def deserialize(self, field, pstruct):
         return pstruct

@@ -19,7 +19,7 @@ setup(
     url='https://github.com/majerteam/deform_bootstrap_extensions',
     author='Gaston Tjebbes - Majerti',
     author_email='tech@majerti.fr',
-    install_requires=['deform_bootstrap', 'pyramid'],
+    install_requires=['deform_bootstrap'],
     extra_requires={'docs': ['sphinx'], 'test':['pytest']},
     classifiers=[
         'Environment :: Web Environment',
