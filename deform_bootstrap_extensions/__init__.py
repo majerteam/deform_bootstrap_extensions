@@ -147,51 +147,54 @@ class GridMappingWidget(TableMappingWidget):
     """
     A custom mapping widget rendering it as a grid
 
-    :param grid: A matrix describing the grid we want. The matrix should be
-    composed of two dimensionnal vectors (width, filled) where filled is a
+    :param tuple grid: A matrix describing the grid we want. The matrix should
+    be composed of two dimensionnal vectors (width, filled) where filled is a
     boolean.
 
-    :param named_grid: A matrix describing the grid we want. The matrix should
-    be composed of two dimensionnal vectors (name, width).
+    :param tuple named_grid: A matrix describing the grid we want. The matrix
+    should be composed of two dimensionnal vectors (name, width).
 
-    e.g:
+    .. code-block:: python
 
-   class CompanyMainInformations(colander.MappingSchema):
-       title = colander.SchemaNode(
-           colander.String(),
-           title=u'Nom entreprise',
-       )
-       address = colander.SchemaNode(
-           colander.String(),
-           title=u'Adresse',
-           width="5",
-       )
-       lon_coord = colander.SchemaNode(
-           colander.Float(),
-           title=u"Longitude",
-       )
-       lat_coord = colander.SchemaNode(
-           colander.Float(),
-           title=u"Latitude",
-       )
-
-    GRID = (
-           ((3, True), ),
-           ((6, True), (2, False), (2, True), (2, True)),
-           )
-
-    class CompanySchema(colander.Schema):
-        tab = CompanyMainInformations(widget=GridMappingWidget(grid=GRID))
-
-    NAMED_GRID = (
-        (('title', 3), ),
-        (('address', 6), (None, 2), ('lon_coord', 2), ('lat_coord', 2)),
-        )
-
-    class CompanySchema(colander.Schema):
-        tab = CompanyMainInformations(
-            widget=GridMappingWidget(named_grid=NAMED_GRID)
+        class CompanyMainInformations(colander.MappingSchema):
+            title = colander.SchemaNode(
+                colander.String(),
+                title=u'Nom entreprise',
             )
+            address = colander.SchemaNode(
+                colander.String(),
+                title=u'Adresse',
+                width="5",
+            )
+            lon_coord = colander.SchemaNode(
+                colander.Float(),
+                title=u"Longitude",
+            )
+            lat_coord = colander.SchemaNode(
+                colander.Float(),
+                title=u"Latitude",
+            )
+
+            GRID = (
+                ((3, True), ),
+                ((6, True), (2, False), (2, True), (2, True)),
+                )
+
+            class CompanySchema(colander.Schema):
+                tab = CompanyMainInformations(i
+                    widget=GridMappingWidget(grid=GRID)
+                )
+
+            NAMED_GRID = (
+                (('title', 3), ),
+                (('address', 6), (None, 2), ('lon_coord', 2), ('lat_coord', 2)),
+                )
+
+            class CompanySchema(colander.Schema):
+                tab = CompanyMainInformations(
+                    widget=GridMappingWidget(named_grid=NAMED_GRID)
+                    )
+
 
     Here, in both cases, we've got a two lines grid with 1 element on the first
     line and 3 on the second one. The second element of the second line will be
@@ -389,7 +392,7 @@ class AccordionFormWidget(GridFormWidget):
     """
     AccordionFormWidget is supposed to be combined with colanderalchemy
 
-    The way it works :
+    The way it works::
 
         In your SqlAlchemy models, enter the __colanderalchemy__ key under the
         info attribute.  All columns of a single model can have a section key.
@@ -402,7 +405,8 @@ class AccordionFormWidget(GridFormWidget):
         The associated_grid_object should be in the same format as for the
         GridMappingWidget
 
-    Example :
+
+    .. code-block:: python
 
         class Model(DBBASE):
             coordonnees_emergency_name = Column(
